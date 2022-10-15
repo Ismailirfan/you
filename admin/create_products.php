@@ -4,8 +4,15 @@ if(isset($_POST['btnsubmit']))
 {
     $name = $_POST['pro_name'];
     $category = $_POST['cat_id'];
-    $q = "insert into `products` values (null,$name)";
     $excute = mysqli_query($con,$q);
+    $img = $_POST['img']['name'];
+    $tmp_img = $_POST['img']['tmp_img'];
+    $dir = "img/"
+    $upload = move_uploaded_file($tmp_img,$dir.$img);
+    if($upload)
+    {
+        $q = "insert into `products` values (null,$name,$category,$img)";
+    }
 }
 include "function.php";
 headers();

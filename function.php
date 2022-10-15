@@ -12,6 +12,11 @@ function headers()
         $logout .= '<a href="signin.php">Sign in</a>
         <a href="signup.php">Sign up</a>';
     }
+    $q = "select * from `categories`";
+    $excute = mysqli_query($con,$q);
+    while ($rows = mysqli_fetch_assoc($excute)) {
+        $list = "<li><a href='product_spec.php?id=$rows[cat_id]'>{$rows[cat_name]}</a></li>";
+    }
     echo '
     <!DOCTYPE html>
 <html lang="zxx">
@@ -114,13 +119,9 @@ function headers()
                         <ul>
                             <li class="active"><a href="./index.php">Home</a></li>
                             <li><a href="./shop.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
+                            <li><a href="#">Categories</a>
                                 <ul class="dropdown">
-                                    <li><a href="./about.html">About Us</a></li>
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shopping-cart.html">Shopping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                '. $list .'
                                 </ul>
                             </li>
                             <li><a href="./blog.html">Blog</a></li>
